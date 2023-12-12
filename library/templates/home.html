@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<table class="table table-striped table-hover table-bordered">
+    <thead class="table-dark">
+        <tr>
+            <th scope="col">Access NO</th>
+            <th scope="col">Title</th>
+            <th scope="col">Author</th>
+            <th scope="col">Status</th>
+            <th scope="col">Location</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% if books %}
+            {% for book in books %}
+                <tr>
+                    <td><a href="{% url 'book' book.id %}">{{ book.access_no }}</a></td>
+                    <td>{{ book.title }}</td>
+                    <td>{{ book.author }}</td>
+                    <td>{{ book.status }}
+                        <a href="{% url 'issue_book' book.id %}" class="btn btn-secondary">Issue</a>
+                        <a href="{% url 'return_book' book.id %}" class="btn btn-secondary">Return</a>
+                    </td>
+                    <td>{{ book.location }}</td>
+                </tr>
+            {% endfor %}
+        {% endif %}
+    </tbody>
+</table>
+
+
+{% endblock %}
